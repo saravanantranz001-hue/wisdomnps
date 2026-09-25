@@ -1,0 +1,6 @@
+{
+  "name": "Wisdom Nursery and Primary School - Essur",
+  "description": "School Management Portal for Wisdom Nursery and Primary School - Essur (Phone/GPay: 9176593129, Essur 603310) with student tracking, fee management, and parent communication.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
