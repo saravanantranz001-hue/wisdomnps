@@ -527,21 +527,19 @@ export const BulkPdfReceiptModal: React.FC<BulkPdfReceiptModalProps> = ({
                         {includeGPayQr && (
                           <div className="w-16 h-16 bg-white border border-slate-300 rounded-lg p-1 shrink-0 flex flex-col items-center justify-center">
                             {/* Inline crisp QR placeholder representation */}
-                            <svg className="w-full h-full text-slate-900" viewBox="0 0 24 24" fill="currentColor">
-                              <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm14 2h4v4h-4v-4zm-4-2h2v2h-2v-2zm4-4h2v2h-2v-2zm-2 2h2v2h-2v-2zm0 4h2v2h-2v-2zm-4-4h2v2h-2v-2zm2 2h2v2h-2v-2z" />
-                            </svg>
+                            <img src="https://raw.githubusercontent.com/saravanantranz001-hue/wisdomnps/main/src/assets/images/Pasted%20Image.png" alt={`Scan to pay to ${SCHOOL_INFO.upiId}`} className="w-full h-full object-contain" />
                             <span className="text-[7px] font-black text-emerald-800">GPAY</span>
                           </div>
                         )}
                         <div>
                           <div className="text-[11px] font-bold text-slate-800">
-                            Payment via Google Pay (GPay)
+                            Scan to pay via any UPI app
                           </div>
                           <div className="text-xs font-black text-emerald-700 font-mono">
-                            Phone / GPay: 9176593129
+                            UPI ID: {SCHOOL_INFO.upiId}
                           </div>
                           <div className="text-[10px] text-slate-500">
-                            Please quote student name and admission # when paying.
+                            Pay the amount due and quote student name and admission #.
                           </div>
                         </div>
                       </div>
