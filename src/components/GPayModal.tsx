@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Check, Copy, QrCode, Phone, ShieldCheck, ArrowRight, Share2, Sparkles } from 'lucide-react';
 import { SCHOOL_INFO } from '../data/initialData';
 
@@ -19,7 +19,7 @@ export const GPayModal: React.FC<GPayModalProps> = ({
 }) => {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [copiedUpi, setCopiedUpi] = useState(false);
-  const [amount, setAmount] = useState<number>(presetAmount || 5000);
+  const [amount, setAmount] = useState<number>(presetAmount || 5000);    useEffect(() => {     if (isOpen) setAmount(presetAmount || 5000);   }, [isOpen, presetAmount]);
 
   if (!isOpen) return null;
 
@@ -34,9 +34,9 @@ export const GPayModal: React.FC<GPayModalProps> = ({
     }
   };
 
-  const upiUrl = `upi://pay?pa=${SCHOOL_INFO.upiId}&pn=WISDOM+NURSERY+AND+PRIMARY+SCHOOL&am=${amount}&cu=INR`;
+  const paymentNote = studentName     ? `School fee ${studentName}${studentClass ? ` ${studentClass}` : ''}`     : 'School fee';   const upiUrl = `upi://pay?pa=${encodeURIComponent(SCHOOL_INFO.upiId)}&pn=${encodeURIComponent('R Saravanan')}&am=${amount}&cu=INR&tn=${encodeURIComponent(paymentNote)}`;
   const whatsappMsg = encodeURIComponent(
-    `Hello Wisdom School, I have transferred fee of ₹${amount} for student ${studentName || ''} (${studentClass || ''}) via GPay to 9176593129. Please find screenshot attached.`
+    `Hello Wisdom School, I have transferred fee of ₹${amount} for student ${studentName || ''} (${studentClass || ''}) via UPI to ${SCHOOL_INFO.upiId}. Please find screenshot attached.`
   );
 
   return (
@@ -113,69 +113,23 @@ export const GPayModal: React.FC<GPayModalProps> = ({
             </div>
           </div>
 
-          {/* Styled SVG UPI QR Code */}
+          {/* The school's supplied UPI QR code */}
           <div className="relative mx-auto w-48 h-48 bg-white p-3 rounded-2xl shadow-lg border-2 border-emerald-500/80 flex flex-col items-center justify-center">
             {/* SVG Crisp QR Code visual representation */}
-            <svg viewBox="0 0 100 100" className="w-full h-full">
-              {/* Corner position markers */}
-              <rect x="5" y="5" width="28" height="28" rx="4" fill="none" stroke="#0f172a" strokeWidth="4" />
-              <rect x="11" y="11" width="16" height="16" rx="2" fill="#0f172a" />
-
-              <rect x="67" y="5" width="28" height="28" rx="4" fill="none" stroke="#0f172a" strokeWidth="4" />
-              <rect x="73" y="11" width="16" height="16" rx="2" fill="#0f172a" />
-
-              <rect x="5" y="67" width="28" height="28" rx="4" fill="none" stroke="#0f172a" strokeWidth="4" />
-              <rect x="11" y="73" width="16" height="16" rx="2" fill="#0f172a" />
-
-              {/* Data pattern blocks */}
-              <rect x="38" y="10" width="8" height="8" fill="#0f172a" />
-              <rect x="50" y="10" width="8" height="8" fill="#0f172a" />
-              <rect x="38" y="24" width="8" height="8" fill="#0f172a" />
-              <rect x="50" y="24" width="8" height="8" fill="#0f172a" />
-
-              <rect x="10" y="38" width="8" height="8" fill="#0f172a" />
-              <rect x="24" y="38" width="8" height="8" fill="#0f172a" />
-              <rect x="38" y="38" width="8" height="8" fill="#0f172a" />
-              <rect x="54" y="38" width="8" height="8" fill="#0f172a" />
-              <rect x="68" y="38" width="8" height="8" fill="#0f172a" />
-              <rect x="82" y="38" width="8" height="8" fill="#0f172a" />
-
-              <rect x="10" y="52" width="8" height="8" fill="#0f172a" />
-              <rect x="24" y="52" width="8" height="8" fill="#0f172a" />
-              <rect x="38" y="52" width="8" height="8" fill="#0f172a" />
-              <rect x="54" y="52" width="8" height="8" fill="#0f172a" />
-              <rect x="68" y="52" width="8" height="8" fill="#0f172a" />
-              <rect x="82" y="52" width="8" height="8" fill="#0f172a" />
-
-              <rect x="38" y="66" width="8" height="8" fill="#0f172a" />
-              <rect x="50" y="66" width="8" height="8" fill="#0f172a" />
-              <rect x="68" y="66" width="8" height="8" fill="#0f172a" />
-              <rect x="82" y="66" width="8" height="8" fill="#0f172a" />
-
-              <rect x="38" y="80" width="8" height="8" fill="#0f172a" />
-              <rect x="50" y="80" width="8" height="8" fill="#0f172a" />
-              <rect x="68" y="80" width="8" height="8" fill="#0f172a" />
-              <rect x="82" y="80" width="8" height="8" fill="#0f172a" />
-
-              {/* Center GPay Logo Badge */}
-              <circle cx="50" cy="50" r="14" fill="#ffffff" stroke="#e2e8f0" strokeWidth="2" />
-              <text x="50" y="54" fontSize="9" fontWeight="900" textAnchor="middle" fill="#059669">
-                GPay
-              </text>
-            </svg>
+            <img               src="https://raw.githubusercontent.com/saravanantranz001-hue/wisdomnps/main/src/assets/images/Pasted%20Image.png"               alt={`UPI payment QR code for ${SCHOOL_INFO.upiId}`}               className="w-full h-full object-contain"             />
             <div className="absolute -bottom-3 bg-emerald-600 text-white px-3 py-0.5 rounded-full text-[10px] font-bold shadow-md">
               Scan with Any UPI App
             </div>
           </div>
 
           <p className="text-xs text-slate-500 mt-4">
-            Scan using <strong>Google Pay</strong>, <strong>PhonePe</strong>, or <strong>Paytm</strong>
+            Scan using <strong>Google Pay</strong>, <strong>PhonePe</strong>, or <strong>Paytm</strong>. Enter the fee amount shown above.
           </p>
 
           {/* Quick Copy Number Block */}
           <div className="mt-4 p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold text-slate-600">GPay Mobile Number:</span>
+              <span className="font-semibold text-slate-600">School Contact (Phone):</span>
               <div className="flex items-center gap-2">
                 <span className="font-black text-slate-900 text-sm">{SCHOOL_INFO.gpay}</span>
                 <button
