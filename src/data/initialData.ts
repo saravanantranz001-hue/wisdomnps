@@ -11,7 +11,7 @@ export const SCHOOL_INFO = {
   quoteAuthor: "Nelson Mandela",
   phone: "9176593129",
   gpay: "9176593129",
-  upiId: "9176593129@okaxis",
+  upiId: "rsaravanan102002-1@okhdfcbank",
   address: "Essur - 603310",
   fullAddress: "Main Road, Essur, Cheyyar Taluk, Thiruvannamalai District, Tamil Nadu - 603310",
   email: "wisdomessur@gmail.com",
