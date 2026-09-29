@@ -126,7 +126,7 @@ export const GPayModal: React.FC<GPayModalProps> = ({
             Scan using <strong>Google Pay</strong>, <strong>PhonePe</strong>, or <strong>Paytm</strong>. Enter the fee amount shown above.
           </p>
 
-          {/* Quick Copy Number Block */}
+          <a href={upiUrl} className="mt-3 inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-emerald-700"><ArrowRight className="w-4 h-4" />Pay in a UPI App</a>            {/* Quick Copy Number Block */}
           <div className="mt-4 p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-slate-600">School Contact (Phone):</span>
