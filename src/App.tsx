@@ -128,7 +128,7 @@ export default function App() {
     ]);
   };
 
-  const handleUpdateStudent = (updatedStudent: Student) => {
+  const handleBatchImportStudents = (importedStudents: Student[], mode: 'append' | 'replace') => {     setStudents((currentStudents) =>       mode === 'replace' ? importedStudents : [...importedStudents, ...currentStudents]     );     setActivities((currentActivities) => [       {         id: `act-${Date.now()}`,         title: `${importedStudents.length} student records imported`,         time: 'Just now',         type: 'admission',         iconType: 'UserPlus',         meta: mode === 'replace' ? 'Student directory replaced' : 'Added to student directory',       },       ...currentActivities,     ]);   };    const handleUpdateStudent = (updatedStudent: Student) => {
     setStudents(students.map((s) => (s.id === updatedStudent.id ? updatedStudent : s)));
   };
 
@@ -420,7 +420,7 @@ export default function App() {
               onAddStudent={handleAddStudent}
               onUpdateStudent={handleUpdateStudent}
               onDeleteStudent={handleDeleteStudent}
-              onOpenGPayForStudent={triggerGPayForStudent}
+              onOpenGPayForStudent={triggerGPayForStudent}               onBatchImportStudents={handleBatchImportStudents}
             />
           )}
 
@@ -507,7 +507,7 @@ export default function App() {
               onUpdateVanRoute={handleUpdateVanRoute}
               onDeleteVanRoute={handleDeleteVanRoute}
               onUpdateStudent={handleUpdateStudent}
-              onOpenGPayForStudent={triggerGPayForStudent}
+              onOpenGPayForStudent={triggerGPayForStudent}               onBatchImportStudents={handleBatchImportStudents}
             />
           )}
 
